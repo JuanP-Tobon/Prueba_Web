@@ -16,7 +16,7 @@ targetCompatibility = 17
 
 
 dependencies {
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.10.2")
     implementation 'net.serenity-bdd:serenity-junit:4.1.10'
     implementation 'net.serenity-bdd:serenity-core:4.1.10'
     implementation 'net.serenity-bdd:serenity-cucumber:4.1.10'
