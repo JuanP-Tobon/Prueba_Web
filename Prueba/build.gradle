@@ -1,6 +1,7 @@
 plugins {
     id "net.serenity-bdd.serenity-gradle-plugin" version "4.0.46"
     id 'java'
+    id 'jvm-test-suite'
     id 'eclipse'
     id 'idea'
 }
@@ -16,16 +17,15 @@ targetCompatibility = 17
 
 
 dependencies {
-    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.10.2")
     implementation 'net.serenity-bdd:serenity-junit:4.1.10'
     implementation 'net.serenity-bdd:serenity-core:4.1.10'
     implementation 'net.serenity-bdd:serenity-cucumber:4.1.10'
     implementation 'net.serenity-bdd:serenity-screenplay:4.1.10'
     implementation 'org.assertj:assertj-core:3.25.3'
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
 }
 
 test {
-    useJUnitPlatform()
     systemProperties System.getProperties()
 }
 
