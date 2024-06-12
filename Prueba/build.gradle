@@ -12,9 +12,12 @@ repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 17
-targetCompatibility = 17
-
+java {
+    toolchain {
+        def var = languageVersion = JavaLanguageVersion.of(17)
+        var
+    }
+}
 
 dependencies {
     implementation 'net.serenity-bdd:serenity-junit:4.1.10'

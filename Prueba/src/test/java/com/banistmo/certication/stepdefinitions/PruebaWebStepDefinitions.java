@@ -1,14 +1,18 @@
 package com.banistmo.certication.stepdefinitions;
 
+import com.banistmo.certication.questions.Validation;
+import com.banistmo.certication.tasks.FillForm;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actions.Open;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
-import net.serenitybdd.screenplay.waits.WaitUntil;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class PruebaWebStepDefinitions {
 
@@ -19,19 +23,16 @@ public class PruebaWebStepDefinitions {
 
     @Given("The user Open the page")
     public void theUserOpenThePage() {
-        OnStage.theActorCalled("User").wasAbleTo(Open.browserOn().thePageNamed("pages.urlTest"));
+        OnStage.theActorCalled("user").wasAbleTo(Open.browserOn().thePageNamed("pages.urlTest"));
     }
 
     @When("The user fill the forms")
     public void theUserFillTheForms() {
-        OnStage.theActorInTheSpotlight().attemptsTo(
-                WaitUntil.the(".unauthenticated-nav-bar__sign-up", WebElementStateMatchers.isClickable()).forNoMoreThan(10).seconds(),
-                Click.on(".unauthenticated-nav-bar__sign-up")
-        );
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        OnStage.theActorInTheSpotlight().attemptsTo(FillForm.on());
+    }
+
+    @Then("The user see the confirmation message")
+    public void theUserSeeTheConfirmationMessage() {
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(Validation.message(),is(equalTo("Add your address"))));
     }
 }

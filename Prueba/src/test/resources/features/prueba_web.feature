@@ -4,3 +4,4 @@ Feature: I as a user
   Scenario: Create User
     Given The user Open the page
     When The user fill the forms
+    Then The user see the confirmation message
